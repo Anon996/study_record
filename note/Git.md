@@ -30,7 +30,7 @@ git clone --bare [刚才创建仓库的路径]
 生成*.git文件，这步过后，之前的仓库文件就可以删除了,去任意路径
 
 ```
-git clone .git
+git clone [name].git
 ```
 
 即可. 修改代码后上传，步骤和2一样，但最后一定要
