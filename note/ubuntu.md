@@ -332,7 +332,7 @@ Categories=System;
 
 完成后注销重新登陆即可
 
-## 十五、ssh记住密码
+## 十五、ssh安装&记住密码
 
 ```
 sudo apt-get install openssh-server
@@ -766,7 +766,7 @@ cd gdb-7.5
 
   ```
 make
-make install
+sudo make install
 vim /etc/environment --把arm-linux-gdb加入环境变量 (:/usr/local/arm-gdb/bin)
 source /etc/environment  //更新环境变量
   ```
