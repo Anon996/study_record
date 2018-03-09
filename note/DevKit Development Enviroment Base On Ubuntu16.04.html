@@ -1,0 +1,386 @@
+<!doctype html>
+<html style='font-size:12px !important'>
+<head>
+<meta charset='UTF-8'><meta name='viewport' content='width=device-width initial-scale=1'>
+<title>DevKit Development Enviroment Base On Ubuntu16.04.md</title><link href='https://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700,700italic&subset=latin,cyrillic-ext,cyrillic,latin-ext' rel='stylesheet' type='text/css'><style type='text/css'>html, body {overflow-x: initial !important;}.CodeMirror { height: auto; }
+.CodeMirror-scroll { overflow-y: hidden; overflow-x: auto; }
+.CodeMirror-lines { padding: 4px 0px; }
+.CodeMirror pre { }
+.CodeMirror-scrollbar-filler, .CodeMirror-gutter-filler { background-color: white; }
+.CodeMirror-gutters { border-right: 1px solid rgb(221, 221, 221); background-color: rgb(247, 247, 247); white-space: nowrap; }
+.CodeMirror-linenumbers { }
+.CodeMirror-linenumber { padding: 0px 3px 0px 5px; text-align: right; color: rgb(153, 153, 153); }
+.CodeMirror div.CodeMirror-cursor { border-left: 1px solid black; z-index: 3; }
+.CodeMirror div.CodeMirror-secondarycursor { border-left: 1px solid silver; }
+.CodeMirror.cm-keymap-fat-cursor div.CodeMirror-cursor { width: auto; border: 0px; background: rgb(119, 238, 119); z-index: 1; }
+.CodeMirror div.CodeMirror-cursor.CodeMirror-overwrite { }
+.cm-tab { display: inline-block; }
+.cm-s-typora-default .cm-header, .cm-s-typora-default .cm-property { color: rgb(217, 79, 138); }
+.cm-s-typora-default pre.cm-header1:not(.cm-atom) :not(.cm-overlay) { font-size: 2rem; line-height: 2rem; }
+.cm-s-typora-default pre.cm-header2:not(.cm-atom) :not(.cm-overlay) { font-size: 1.4rem; line-height: 1.4rem; }
+.cm-s-typora-default .cm-atom, .cm-s-typora-default .cm-number { color: rgb(149, 132, 134); }
+.cm-s-typora-default .cm-table-row, .cm-s-typora-default .cm-block-start { font-family: monospace; }
+.cm-s-typora-default .cm-comment, .cm-s-typora-default .cm-code { color: rgb(74, 90, 159); font-family: monospace; }
+.cm-s-typora-default .cm-tag { color: rgb(169, 68, 66); }
+.cm-s-typora-default .cm-string { color: rgb(126, 134, 169); }
+.cm-s-typora-default .cm-link { color: rgb(196, 122, 15); text-decoration: underline; }
+.cm-s-typora-default .cm-variable-2, .cm-s-typora-default .cm-variable-1 { color: inherit; }
+.cm-s-typora-default .cm-overlay { font-size: 1rem; font-family: monospace; }
+.CodeMirror.cm-s-typora-default div.CodeMirror-cursor { border-left: 3px solid rgb(228, 98, 154); }
+.cm-s-typora-default .CodeMirror-activeline-background { left: -60px; right: -30px; background: rgba(204, 204, 204, 0.2); }
+.cm-s-typora-default .CodeMirror-gutters { border-right: none; background-color: inherit; }
+.cm-s-typora-default .cm-trailing-space-new-line::after, .cm-startspace::after, .cm-starttab .cm-tab::after { content: "•"; position: absolute; left: 0px; opacity: 0; font-family: LetterGothicStd, monospace; }
+.os-windows .cm-startspace::after, .os-windows .cm-starttab .cm-tab::after { left: -0.1em; }
+.cm-starttab .cm-tab::after { content: " "; }
+.cm-startspace, .cm-tab, .cm-starttab, .cm-trailing-space-a, .cm-trailing-space-b, .cm-trailing-space-new-line { font-family: monospace; position: relative; }
+.cm-s-typora-default .cm-trailing-space-new-line::after { content: "↓"; opacity: 0.3; }
+.cm-s-inner .cm-keyword { color: rgb(119, 0, 136); }
+.cm-s-inner .cm-atom, .cm-s-inner.cm-atom { color: rgb(34, 17, 153); }
+.cm-s-inner .cm-number { color: rgb(17, 102, 68); }
+.cm-s-inner .cm-def { color: rgb(0, 0, 255); }
+.cm-s-inner .cm-variable { color: black; }
+.cm-s-inner .cm-variable-2 { color: rgb(0, 85, 170); }
+.cm-s-inner .cm-variable-3 { color: rgb(0, 136, 85); }
+.cm-s-inner .cm-property { color: black; }
+.cm-s-inner .cm-operator { color: rgb(152, 26, 26); }
+.cm-s-inner .cm-comment, .cm-s-inner.cm-comment { color: rgb(170, 85, 0); }
+.cm-s-inner .cm-string { color: rgb(170, 17, 17); }
+.cm-s-inner .cm-string-2 { color: rgb(255, 85, 0); }
+.cm-s-inner .cm-meta { color: rgb(85, 85, 85); }
+.cm-s-inner .cm-qualifier { color: rgb(85, 85, 85); }
+.cm-s-inner .cm-builtin { color: rgb(51, 0, 170); }
+.cm-s-inner .cm-bracket { color: rgb(153, 153, 119); }
+.cm-s-inner .cm-tag { color: rgb(17, 119, 0); }
+.cm-s-inner .cm-attribute { color: rgb(0, 0, 204); }
+.cm-s-inner .cm-header, .cm-s-inner.cm-header { color: blue; }
+.cm-s-inner .cm-quote, .cm-s-inner.cm-quote { color: rgb(0, 153, 0); }
+.cm-s-inner .cm-hr, .cm-s-inner.cm-hr { color: rgb(153, 153, 153); }
+.cm-s-inner .cm-link, .cm-s-inner.cm-link { color: rgb(0, 0, 204); }
+.cm-negative { color: rgb(221, 68, 68); }
+.cm-positive { color: rgb(34, 153, 34); }
+.cm-header, .cm-strong { font-weight: bold; }
+.cm-del { text-decoration: line-through; }
+.cm-em { font-style: italic; }
+.cm-link { text-decoration: underline; }
+.cm-error { color: rgb(255, 0, 0); }
+.cm-invalidchar { color: rgb(255, 0, 0); }
+.cm-constant { color: rgb(38, 139, 210); }
+.cm-defined { color: rgb(181, 137, 0); }
+div.CodeMirror span.CodeMirror-matchingbracket { color: rgb(0, 255, 0); }
+div.CodeMirror span.CodeMirror-nonmatchingbracket { color: rgb(255, 34, 34); }
+.cm-s-inner .CodeMirror-activeline-background { background: inherit; }
+.CodeMirror { position: relative; overflow: hidden; }
+.CodeMirror-scroll { margin-bottom: -30px; margin-right: -30px; padding-bottom: 30px; padding-right: 30px; height: 100%; outline: none; position: relative; box-sizing: content-box; }
+.CodeMirror-sizer { position: relative; }
+.CodeMirror-vscrollbar, .CodeMirror-hscrollbar, .CodeMirror-scrollbar-filler, .CodeMirror-gutter-filler { position: absolute; z-index: 6; display: none; }
+.CodeMirror-vscrollbar { right: 0px; top: 0px; overflow-x: hidden; overflow-y: scroll; }
+.CodeMirror-hscrollbar { bottom: 0px; left: 0px; overflow-y: hidden; overflow-x: scroll; }
+.CodeMirror-scrollbar-filler { right: 0px; bottom: 0px; }
+.CodeMirror-gutter-filler { left: 0px; bottom: 0px; }
+.CodeMirror-gutters { position: absolute; left: 0px; top: 0px; padding-bottom: 30px; z-index: 3; }
+.CodeMirror-gutter { white-space: normal; height: 100%; box-sizing: content-box; padding-bottom: 30px; margin-bottom: -32px; display: inline-block; }
+.CodeMirror-gutter-elt { position: absolute; cursor: default; z-index: 4; }
+.CodeMirror-lines { cursor: text; }
+.CodeMirror pre { border-radius: 0px; border-width: 0px; background: transparent; font-family: inherit; font-size: inherit; margin: 0px; white-space: pre; word-wrap: normal; color: inherit; z-index: 2; position: relative; overflow: visible; }
+.CodeMirror-wrap pre { word-wrap: break-word; white-space: pre-wrap; word-break: normal; }
+.CodeMirror-code pre { border-right: 30px solid transparent; width: fit-content; }
+.CodeMirror-wrap .CodeMirror-code pre { border-right: none; width: auto; }
+.CodeMirror-linebackground { position: absolute; left: 0px; right: 0px; top: 0px; bottom: 0px; z-index: 0; }
+.CodeMirror-linewidget { position: relative; z-index: 2; overflow: auto; }
+.CodeMirror-widget { }
+.CodeMirror-wrap .CodeMirror-scroll { overflow-x: hidden; }
+.CodeMirror-measure { position: absolute; width: 100%; height: 0px; overflow: hidden; visibility: hidden; }
+.CodeMirror-measure pre { position: static; }
+.CodeMirror div.CodeMirror-cursor { position: absolute; visibility: hidden; border-right: none; width: 0px; }
+.CodeMirror div.CodeMirror-cursor { visibility: hidden; }
+.CodeMirror-focused div.CodeMirror-cursor { visibility: inherit; }
+.CodeMirror-selected { background: rgb(217, 217, 217); }
+.CodeMirror-focused .CodeMirror-selected { background: rgb(215, 212, 240); }
+.cm-searching { background: rgba(255, 255, 0, 0.4); }
+.CodeMirror span { }
+@media print {
+  .CodeMirror div.CodeMirror-cursor { visibility: hidden; }
+}
+.CodeMirror-lint-markers { width: 16px; }
+.CodeMirror-lint-tooltip { background-color: infobackground; border: 1px solid black; border-radius: 4px; color: infotext; font-family: monospace; overflow: hidden; padding: 2px 5px; position: fixed; white-space: pre-wrap; z-index: 10000; max-width: 600px; opacity: 0; transition: opacity 0.4s; font-size: 0.8em; }
+.CodeMirror-lint-mark-error, .CodeMirror-lint-mark-warning { background-position: left bottom; background-repeat: repeat-x; }
+.CodeMirror-lint-mark-error { background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAADCAYAAAC09K7GAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9sJDw4cOCW1/KIAAAAZdEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIEdJTVBXgQ4XAAAAHElEQVQI12NggIL/DAz/GdA5/xkY/qPKMDAwAADLZwf5rvm+LQAAAABJRU5ErkJggg=="); }
+.CodeMirror-lint-marker-error, .CodeMirror-lint-marker-warning { background-position: center center; background-repeat: no-repeat; cursor: pointer; display: inline-block; height: 16px; width: 16px; vertical-align: middle; position: relative; }
+.CodeMirror-lint-message-error, .CodeMirror-lint-message-warning { padding-left: 18px; background-position: left top; background-repeat: no-repeat; }
+.CodeMirror-lint-marker-error, .CodeMirror-lint-message-error { background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAHlBMVEW7AAC7AACxAAC7AAC7AAAAAAC4AAC5AAD///+7AAAUdclpAAAABnRSTlMXnORSiwCK0ZKSAAAATUlEQVR42mWPOQ7AQAgDuQLx/z8csYRmPRIFIwRGnosRrpamvkKi0FTIiMASR3hhKW+hAN6/tIWhu9PDWiTGNEkTtIOucA5Oyr9ckPgAWm0GPBog6v4AAAAASUVORK5CYII="); }
+.CodeMirror-lint-marker-warning, .CodeMirror-lint-message-warning { background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAANlBMVEX/uwDvrwD/uwD/uwD/uwD/uwD/uwD/uwD/uwD6twD/uwAAAADurwD2tQD7uAD+ugAAAAD/uwDhmeTRAAAADHRSTlMJ8mN1EYcbmiixgACm7WbuAAAAVklEQVR42n3PUQqAIBBFUU1LLc3u/jdbOJoW1P08DA9Gba8+YWJ6gNJoNYIBzAA2chBth5kLmG9YUoG0NHAUwFXwO9LuBQL1giCQb8gC9Oro2vp5rncCIY8L8uEx5ZkAAAAASUVORK5CYII="); }
+.CodeMirror-lint-marker-multiple { background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAHCAMAAADzjKfhAAAACVBMVEUAAAAAAAC/v7914kyHAAAAAXRSTlMAQObYZgAAACNJREFUeNo1ioEJAAAIwmz/H90iFFSGJgFMe3gaLZ0od+9/AQZ0ADosbYraAAAAAElFTkSuQmCC"); background-repeat: no-repeat; background-position: right bottom; width: 100%; height: 100%; }
+
+
+html { font-size: 14px; background-color: rgb(255, 255, 255); color: rgb(51, 51, 51); }
+body { margin: 0px; padding: 0px; height: auto; bottom: 0px; top: 0px; left: 0px; right: 0px; font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 1rem; line-height: 1.42857; overflow-x: hidden; background: inherit; }
+a:active, a:hover { outline: 0px; }
+.in-text-selection, ::selection { background: rgb(181, 214, 252); text-shadow: none; }
+#write { margin: 0px auto; height: auto; width: inherit; word-break: normal; word-wrap: break-word; position: relative; padding-bottom: 70px; white-space: pre-wrap; overflow-x: auto; }
+.for-image #write { padding-left: 8px; padding-right: 8px; }
+body.typora-export { padding-left: 30px; padding-right: 30px; }
+@media screen and (max-width: 500px) {
+  body.typora-export { padding-left: 0px; padding-right: 0px; }
+  .CodeMirror-sizer { margin-left: 0px !important; }
+  .CodeMirror-gutters { display: none !important; }
+}
+.typora-export #write { margin: 0px auto; }
+#write > p:first-child, #write > ul:first-child, #write > ol:first-child, #write > pre:first-child, #write > blockquote:first-child, #write > div:first-child, #write > table:first-child { margin-top: 30px; }
+#write li > table:first-child { margin-top: -20px; }
+img { max-width: 100%; vertical-align: middle; }
+input, button, select, textarea { color: inherit; font-style: inherit; font-variant: inherit; font-weight: inherit; font-stretch: inherit; font-size: inherit; line-height: inherit; font-family: inherit; }
+input[type="checkbox"], input[type="radio"] { line-height: normal; padding: 0px; }
+::before, ::after, * { box-sizing: border-box; }
+#write p, #write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write div, #write pre { width: inherit; }
+#write p, #write h1, #write h2, #write h3, #write h4, #write h5, #write h6 { position: relative; }
+h1 { font-size: 2rem; }
+h2 { font-size: 1.8rem; }
+h3 { font-size: 1.6rem; }
+h4 { font-size: 1.4rem; }
+h5 { font-size: 1.2rem; }
+h6 { font-size: 1rem; }
+p { -webkit-margin-before: 1rem; -webkit-margin-after: 1rem; -webkit-margin-start: 0px; -webkit-margin-end: 0px; }
+.mathjax-block { margin-top: 0px; margin-bottom: 0px; -webkit-margin-before: 0rem; -webkit-margin-after: 0rem; }
+.hidden { display: none; }
+.md-blockmeta { color: rgb(204, 204, 204); font-weight: bold; font-style: italic; }
+a { cursor: pointer; }
+#write input[type="checkbox"] { cursor: pointer; width: inherit; height: inherit; margin: 4px 0px 0px; }
+tr { break-inside: avoid; break-after: auto; }
+thead { display: table-header-group; }
+table { border-collapse: collapse; border-spacing: 0px; width: 100%; overflow: auto; break-inside: auto; text-align: left; }
+table.md-table td { min-width: 80px; }
+.CodeMirror-gutters { border-right: 0px; background-color: inherit; }
+.CodeMirror { text-align: left; }
+.CodeMirror-placeholder { opacity: 0.3; }
+.CodeMirror pre { padding: 0px 4px; }
+.CodeMirror-lines { padding: 0px; }
+div.hr:focus { cursor: none; }
+pre { white-space: pre-wrap; }
+.CodeMirror-gutters { margin-right: 4px; }
+.md-fences { font-size: 0.9rem; display: block; break-inside: avoid; text-align: left; overflow: visible; white-space: pre; background: inherit; position: relative !important; }
+.md-diagram-panel { width: 100%; margin-top: 10px; text-align: center; padding-top: 0px; padding-bottom: 8px; overflow-x: auto; }
+.md-fences .CodeMirror.CodeMirror-wrap { top: -1.6em; margin-bottom: -1.6em; }
+.md-fences.mock-cm { white-space: pre-wrap; }
+.show-fences-line-number .md-fences { padding-left: 0px; }
+.show-fences-line-number .md-fences.mock-cm { padding-left: 40px; }
+.footnotes { opacity: 0.8; font-size: 0.9rem; padding-top: 1em; padding-bottom: 1em; }
+.footnotes + .footnotes { margin-top: -1em; }
+.md-reset { margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: top; background: transparent; text-decoration: none; text-shadow: none; float: none; position: static; width: auto; height: auto; white-space: nowrap; cursor: inherit; -webkit-tap-highlight-color: transparent; line-height: normal; font-weight: normal; text-align: left; box-sizing: content-box; direction: ltr; }
+li div { padding-top: 0px; }
+blockquote { margin: 1rem 0px; }
+li p, li .mathjax-block { margin: 0.5rem 0px; }
+li { margin: 0px; position: relative; }
+blockquote > :last-child { margin-bottom: 0px; }
+blockquote > :first-child { margin-top: 0px; }
+.footnotes-area { color: rgb(136, 136, 136); margin-top: 0.714rem; padding-bottom: 0.143rem; }
+@media print {
+  html, body { height: 100%; }
+  .typora-export * { -webkit-print-color-adjust: exact; }
+  h1, h2, h3, h4, h5, h6 { break-after: avoid-page; orphans: 2; }
+  p { orphans: 4; }
+  html.blink-to-pdf { font-size: 13px; }
+  .typora-export #write { padding-left: 1cm; padding-right: 1cm; }
+  .typora-export #write::after { height: 0px; }
+  @page { margin: 20mm 0mm; }
+}
+.footnote-line { margin-top: 0.714em; font-size: 0.7em; }
+a img, img a { cursor: pointer; }
+pre.md-meta-block { font-size: 0.8rem; min-height: 2.86rem; white-space: pre-wrap; background: rgb(204, 204, 204); display: block; overflow-x: hidden; }
+p .md-image:only-child { display: inline-block; width: 100%; text-align: center; }
+#write .MathJax_Display { margin: 0.8em 0px 0px; }
+.mathjax-block { white-space: pre; overflow: hidden; width: 100%; }
+p + .mathjax-block { margin-top: -1.143rem; }
+.mathjax-block:not(:empty)::after { display: none; }
+[contenteditable="true"]:active, [contenteditable="true"]:focus { outline: none; box-shadow: none; }
+.task-list { list-style-type: none; }
+.task-list-item { position: relative; padding-left: 1em; }
+.task-list-item input { position: absolute; top: 0px; left: 0px; }
+.math { font-size: 1rem; }
+.md-toc { min-height: 3.58rem; position: relative; font-size: 0.9rem; border-radius: 10px; }
+.md-toc-content { position: relative; margin-left: 0px; }
+.md-toc::after, .md-toc-content::after { display: none; }
+.md-toc-item { display: block; color: rgb(65, 131, 196); text-decoration: none; }
+.md-toc-inner:hover { }
+.md-toc-inner { display: inline-block; cursor: pointer; }
+.md-toc-h1 .md-toc-inner { margin-left: 0px; font-weight: bold; }
+.md-toc-h2 .md-toc-inner { margin-left: 2em; }
+.md-toc-h3 .md-toc-inner { margin-left: 4em; }
+.md-toc-h4 .md-toc-inner { margin-left: 6em; }
+.md-toc-h5 .md-toc-inner { margin-left: 8em; }
+.md-toc-h6 .md-toc-inner { margin-left: 10em; }
+@media screen and (max-width: 48em) {
+  .md-toc-h3 .md-toc-inner { margin-left: 3.5em; }
+  .md-toc-h4 .md-toc-inner { margin-left: 5em; }
+  .md-toc-h5 .md-toc-inner { margin-left: 6.5em; }
+  .md-toc-h6 .md-toc-inner { margin-left: 8em; }
+}
+a.md-toc-inner { font-size: inherit; font-style: inherit; font-weight: inherit; line-height: inherit; }
+.footnote-line a:not(.reversefootnote) { color: inherit; }
+.md-attr { display: none; }
+.md-fn-count::after { content: "."; }
+.md-tag { opacity: 0.5; }
+.md-comment { color: rgb(162, 127, 3); opacity: 0.8; font-family: monospace; }
+code { text-align: left; }
+h1 .md-tag, h2 .md-tag, h3 .md-tag, h4 .md-tag, h5 .md-tag, h6 .md-tag { font-weight: initial; opacity: 0.35; }
+a.md-print-anchor { border-width: initial !important; border-style: none !important; border-color: initial !important; display: inline-block !important; position: absolute !important; width: 1px !important; right: 0px !important; outline: none !important; background: transparent !important; text-decoration: initial !important; text-shadow: initial !important; }
+.md-inline-math .MathJax_SVG .noError { display: none !important; }
+.mathjax-block .MathJax_SVG_Display { text-align: center; margin: 1em 0em; position: relative; text-indent: 0px; max-width: none; max-height: none; min-height: 0px; min-width: 100%; width: auto; display: block !important; }
+.MathJax_SVG_Display, .md-inline-math .MathJax_SVG_Display { width: auto; margin: inherit; display: inline-block !important; }
+.MathJax_SVG .MJX-monospace { font-family: monospace; }
+.MathJax_SVG .MJX-sans-serif { font-family: sans-serif; }
+.MathJax_SVG { display: inline; font-style: normal; font-weight: normal; line-height: normal; zoom: 90%; text-indent: 0px; text-align: left; text-transform: none; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; direction: ltr; max-width: none; max-height: none; min-width: 0px; min-height: 0px; border: 0px; padding: 0px; margin: 0px; }
+.MathJax_SVG * { transition: none; }
+
+
+@font-face { font-family: "PT Serif"; font-style: normal; font-weight: normal; src: local("PT Serif"), local("PTSerif-Regular"), url("./newsprint/PT_Serif-Web-Regular.ttf"); }
+@font-face { font-family: "PT Serif"; font-style: italic; font-weight: normal; src: local("PT Serif"), local("PTSerif-Italic"), url("./newsprint/PT_Serif-Web-Italic.ttf"); }
+@font-face { font-family: "PT Serif"; font-style: normal; font-weight: bold; src: local("PT Serif"), local("PTSerif-Bold"), url("./newsprint/PT_Serif-Web-Bold.ttf"); }
+@font-face { font-family: "PT Serif"; font-style: italic; font-weight: bold; src: local("PT Serif"), local("PTSerif-BoldItalic"), url("./newsprint/PT_Serif-Web-BoldItalic.ttf"); }
+html { font-size: 16px; }
+html, body { background-color: rgb(243, 242, 238); font-family: "PT Serif", "Times New Roman", Times; color: rgb(31, 9, 9); line-height: 1.5em; }
+#write { max-width: 40em; }
+ol, ul { list-style: none; }
+blockquote, q { quotes: none; }
+blockquote::before, blockquote::after, q::before, q::after { content: none; }
+table { border-collapse: collapse; border-spacing: 0px; }
+h1, h2, h3, h4, h5, h6 { font-weight: bold; }
+h1 { font-size: 1.875em; line-height: 1.6em; margin-top: 2em; }
+h2, h3 { font-size: 1.3125em; line-height: 1.15; margin-top: 2.28571em; margin-bottom: 1.15em; }
+h3 { font-weight: normal; }
+h4 { font-size: 1.125em; margin-top: 2.67em; }
+h5, h6 { font-size: 1em; }
+h1 { border-bottom: 1px solid; margin-bottom: 1.875em; padding-bottom: 0.8125em; }
+a { text-decoration: none; color: rgb(6, 85, 136); }
+a:hover, a:active { text-decoration: underline; }
+p, blockquote, .md-fences { margin-bottom: 1.5em; }
+h1, h2, h3, h4, h5, h6 { margin-bottom: 1.5em; }
+blockquote { font-style: italic; border-left: 5px solid; margin-left: 2em; padding-left: 1em; }
+ul, ol { margin: 0px 0px 1.5em 1.5em; }
+ol li { list-style-type: decimal; list-style-position: outside; }
+ul li { list-style-type: disc; list-style-position: outside; }
+.md-meta, .md-before, .md-after { color: rgb(153, 153, 153); }
+table { margin-bottom: 1.5em; font-size: 1em; }
+thead th, tfoot th { padding: 0.25em 0.25em 0.25em 0.4em; text-transform: uppercase; }
+th { text-align: left; }
+td { vertical-align: top; padding: 0.25em 0.25em 0.25em 0.4em; }
+code, .md-fences { background-color: rgb(218, 218, 218); padding-left: 1ch; padding-right: 1ch; }
+.md-fences { margin-left: 2em; margin-bottom: 3em; }
+.md-fences .CodeMirror.CodeMirror-wrap { top: -0.8em; }
+pre, code, tt { font-size: 0.875em; line-height: 1.71429em; }
+h1 { line-height: 1.3em; font-weight: normal; margin-bottom: 0.5em; }
+p + ul, p + ol { margin-top: -1em; }
+h3 + ul, h4 + ul, h5 + ul, h6 + ul, h3 + ol, h4 + ol, h5 + ol, h6 + ol { margin-top: 0.5em; }
+li > ul, li > ol { margin-top: inherit; }
+h2, h3 { margin-bottom: 0.75em; }
+hr { border-top: none; border-right: none; border-bottom: 1px solid; border-left: none; }
+h1 { border-color: rgb(197, 197, 197); }
+blockquote { border-color: rgb(186, 186, 186); color: rgb(101, 101, 101); }
+thead.md-table-edit { background-color: transparent; }
+thead { background-color: rgb(218, 218, 218); }
+tr:nth-child(2n) { background: rgb(232, 231, 231); }
+hr { border-color: rgb(197, 197, 197); }
+.task-list { padding-left: 1rem; }
+.task-list-item { padding-left: 1.5rem; list-style-type: none; }
+.task-list-item input::before { content: "√"; display: inline-block; width: 1.25rem; height: 1.6rem; vertical-align: middle; text-align: center; color: rgb(221, 221, 221); background-color: rgb(243, 242, 238); }
+.task-list-item input:checked::before, .task-list-item input[checked]::before { color: inherit; }
+#write pre.md-meta-block { min-height: 1.875rem; color: rgb(85, 85, 85); border: 0px; background: transparent; margin-left: 1em; margin-top: 1em; }
+.md-image > .md-meta { color: rgb(155, 81, 70); }
+.md-image > .md-meta { font-family: Menlo, "Ubuntu Mono", Consolas, "Courier New", "Microsoft Yahei", "Hiragino Sans GB", "WenQuanYi Micro Hei", sans-serif; }
+#write > h3.md-focus::before { left: -1.5rem; color: rgb(153, 153, 153); border-color: rgb(153, 153, 153); }
+#write > h4.md-focus::before { left: -1.5rem; top: 0.25rem; color: rgb(153, 153, 153); border-color: rgb(153, 153, 153); }
+#write > h5.md-focus::before { left: -1.5rem; color: rgb(153, 153, 153); border-color: rgb(153, 153, 153); }
+#write > h6.md-focus::before { left: -1.5rem; top: 0.3125rem; color: rgb(153, 153, 153); border-color: rgb(153, 153, 153); }
+.md-toc:focus .md-toc-content { margin-top: 19px; }
+.md-toc-content:empty::before { color: rgb(6, 85, 136); }
+.md-toc-item { color: rgb(6, 85, 136); }
+#write div.md-toc-tooltip { background-color: rgb(243, 242, 238); }
+#outline-dropmenu { background-color: rgb(243, 242, 238); box-shadow: rgba(0, 0, 0, 0.372549) 0px 6px 12px; }
+.pin-outline #outline-dropmenu { background: inherit; box-shadow: none; border-right: 1px dashed; }
+.pin-outline #outline-dropmenu:hover .outline-title-wrapper { border-left: 1px dashed; }
+.outline-item:hover { background-color: rgb(218, 218, 218); border-left: 28px solid rgb(218, 218, 218); border-right: 18px solid rgb(218, 218, 218); }
+.typora-node .outline-item:hover { border-right: 28px solid rgb(218, 218, 218); }
+.outline-expander::before { content: ""; font-family: FontAwesome; font-size: 14px; top: 1px; }
+.outline-expander:hover::before, .outline-item-open > .outline-item > .outline-expander::before { content: ""; }
+.modal-content { background-color: rgb(243, 242, 238); }
+.auto-suggest-container ul li { list-style-type: none; }
+.megamenu-menu, #top-titlebar, #top-titlebar *, .megamenu-content { background: rgb(243, 242, 238); color: rgb(31, 9, 9); }
+.megamenu-menu-header { border-bottom: 1px dashed rgb(32, 43, 51); }
+.megamenu-menu { box-shadow: none; border-right: 1px dashed; }
+header, .context-menu, .megamenu-content, footer { font-family: "PT Serif", "Times New Roman", Times; color: rgb(31, 9, 9); }
+#megamenu-back-btn { color: rgb(31, 9, 9); border-color: rgb(31, 9, 9); }
+.megamenu-menu-header #megamenu-menu-header-title::before { color: rgb(31, 9, 9); }
+.megamenu-menu-list li a:hover, .megamenu-menu-list li a.active { color: inherit; background-color: rgb(232, 231, 223); }
+.long-btn:hover { background-color: rgb(232, 231, 223); }
+#recent-file-panel tbody tr:nth-child(2n-1) { background-color: transparent !important; }
+.megamenu-menu-panel tbody tr:hover td:nth-child(2) { color: inherit; }
+.megamenu-menu-panel .btn { background-color: rgb(210, 209, 209); }
+.btn-default { background-color: transparent; }
+.typora-sourceview-on #toggle-sourceview-btn, .show-word-count #footer-word-count { background: rgb(199, 197, 197); }
+#typora-quick-open { background-color: inherit; }
+.md-diagram-panel { margin-left: -1ch; margin-top: 24px; }
+
+
+
+
+
+
+</style>
+</head>
+<body class='typora-export' >
+<div  id='write'  class = 'is-node'><h1><a name='header-c5' class='md-header-anchor '></a>DevKit Develop Enviroment For Ubuntu16.04</h1><div class='md-toc' mdtype='toc'><p class="md-toc-content"><span class="md-toc-item md-toc-h1" data-ref="c5"><a class="md-toc-inner" href="#header-c5">DevKit Develop Enviroment For Ubuntu16.04</a></span><span class="md-toc-item md-toc-h2" data-ref="c8"><a class="md-toc-inner" href="#header-c8">1.Install Vivado</a></span><span class="md-toc-item md-toc-h3" data-ref="c9"><a class="md-toc-inner" href="#header-c9">1.1 Download</a></span><span class="md-toc-item md-toc-h3" data-ref="c15"><a class="md-toc-inner" href="#header-c15">1.2 Install Main Program</a></span><span class="md-toc-item md-toc-h3" data-ref="c75"><a class="md-toc-inner" href="#header-c75">1.3 Install cable driver</a></span><span class="md-toc-item md-toc-h3" data-ref="c83"><a class="md-toc-inner" href="#header-c83">1.4 Add Vivado SDK to Dash</a></span><span class="md-toc-item md-toc-h2" data-ref="c115"><a class="md-toc-inner" href="#header-c115">2.Build Minimum System Hardware</a></span><span class="md-toc-item md-toc-h3" data-ref="c116"><a class="md-toc-inner" href="#header-c116">2.1 Install Board Interface File</a></span><span class="md-toc-item md-toc-h3" data-ref="c132"><a class="md-toc-inner" href="#header-c132">2.2 Create Project</a></span><span class="md-toc-item md-toc-h3" data-ref="c159"><a class="md-toc-inner" href="#header-c159">2.3  Create Minimum System Design</a></span><span class="md-toc-item md-toc-h3" data-ref="c187"><a class="md-toc-inner" href="#header-c187">2.4 Export hdf(hardware definition file) file</a></span><span class="md-toc-item md-toc-h2" data-ref="c194"><a class="md-toc-inner" href="#header-c194">3.Run AMP(Asymmetric Multi-Processing System) on Devkit</a></span><span class="md-toc-item md-toc-h3" data-ref="c199"><a class="md-toc-inner" href="#header-c199">3.1 Principle</a></span><span class="md-toc-item md-toc-h3" data-ref="c206"><a class="md-toc-inner" href="#header-c206">3.2 Configure SDK</a></span><span class="md-toc-item md-toc-h3" data-ref="c221"><a class="md-toc-inner" href="#header-c221">3.3 Create FSBL Application</a></span><span class="md-toc-item md-toc-h3" data-ref="c236"><a class="md-toc-inner" href="#header-c236">3.4 Create Bare-Metal Application For CPU1</a></span><span class="md-toc-item md-toc-h3" data-ref="c260"><a class="md-toc-inner" href="#header-c260">3.5 u-boot For CPU0</a></span><span class="md-toc-item md-toc-h3" data-ref="c297"><a class="md-toc-inner" href="#header-c297">3.6 Linux Kernel For CPU0</a></span><span class="md-toc-item md-toc-h3" data-ref="c304"><a class="md-toc-inner" href="#header-c304">3.7 Linux Devicetree</a></span><span class="md-toc-item md-toc-h3" data-ref="c312"><a class="md-toc-inner" href="#header-c312">3.8 Linux Filesystem</a></span><span class="md-toc-item md-toc-h3" data-ref="c321"><a class="md-toc-inner" href="#header-c321">3.9 Create BOOT.bin</a></span><span class="md-toc-item md-toc-h3" data-ref="c328"><a class="md-toc-inner" href="#header-c328">3.10 Test</a></span></p></div><h2><a name='header-c8' class='md-header-anchor '></a>1.Install Vivado</h2><h3><a name='header-c9' class='md-header-anchor '></a>1.1 Download</h3><p>​	Our Vivado version is 2016.4 (Download here:<a href='https://www.xilinx.com/support/download.html' target='_blank' >https://www.xilinx.com/support/download.html</a>)</p><p>​	Get Phenix Pro Devkit Firmware from github:</p><pre class='md-fences mock-cm' style='display:block;position:relative'>git clone https://github.com/RobSenseTech/phenix_devkit</pre><h3><a name='header-c15' class='md-header-anchor '></a>1.2 Install Main Program</h3><p>	First of all, we need to install <strong>the latest version</strong>(8u121) of Java SE Development Kit( Download here <a href='http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html' target='_blank' >http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html</a>), then install it:</p><pre class='md-fences mock-cm' style='display:block;position:relative'>cd [your download path]
+tar xf jdk-8u121-linux-x64.tar.gz
+vim ~/.bashrc</pre><p>add these statements:</p><pre class='md-fences mock-cm' style='display:block;position:relative'>export JAVA_HOME=[your jdk path]
+export JRE_HOME=${JAVA_HOME}/jre
+export CLASSPATH=.:{JAVA_HOME}/lib:${JRE_HOME}/lib
+export PATH=${JAVA_HOME}/bin:$PATH</pre><p>use this command to make it work:</p><pre class='md-fences mock-cm' style='display:block;position:relative'>source ~/.bashrc</pre><p>to comfirm whether jdk is installed properly, use this command:</p><pre class='md-fences mock-cm' style='display:block;position:relative'>java -version</pre><p>if JDK is installed properly, it will show these information:</p><pre class='md-fences mock-cm' style='display:block;position:relative'>java version &quot;1.8.0_121&quot;
+Java(TM) SE Runtime Environment (build 1.8.0_121-b13)
+Java HotSpot(TM) 64-Bit Server VM (build 25.121-b13, mixed mode)</pre><p>now, we can install Vivado:</p><pre class='md-fences mock-cm' style='display:block;position:relative'>cd [your vivado path]
+tar xf Xilinx_Vivado_SDK_2016.4_0124_1.tar.gz
+cd Xilinx_Vivado_SDK_2016.4_0124_1
+sudo ./xsetup</pre><p>click Next</p><p><img src='/home/steven/Pictures/devkit/Screenshot%20from%202017-03-13%2015-47-10.png' alt='Screenshot from 2017-03-13 15-47-10' /></p><p>select three &quot;I Agree&quot; and Next</p><p><img src='/home/steven/Pictures/devkit/Screenshot%20from%202017-03-13%2015-50-30.png' alt='Screenshot from 2017-03-13 15-50-30' /></p><p>select third one, click Next</p><p><img src='/home/steven/Pictures/devkit/Screenshot%20from%202017-03-13%2015-50-56.png' alt='Screenshot from 2017-03-13 15-50-56' /></p><p>select &quot;Software Development Kit (SDK)&quot;, click Next</p><p><img src='/home/steven/Pictures/devkit/Screenshot%20from%202017-03-13%2015-52-18.png' alt='Screenshot from 2017-03-13 15-52-18' /></p><p>choose installation directory, click Next</p><p><img src='/home/steven/Pictures/devkit/Screenshot%20from%202017-03-13%2016-00-03.png' alt='Screenshot from 2017-03-13 16-00-03' /></p><p>click install</p><p><img src='/home/steven/Pictures/devkit/Screenshot%20from%202017-03-13%2016-00-38.png' alt='Screenshot from 2017-03-13 16-00-38' /></p><p></p><p><img src='/home/steven/Pictures/devkit/Screenshot%20from%202017-03-13%2016-01-19.png' alt='Screenshot from 2017-03-13 16-01-19' /></p><p>after this, we need to load the license:</p><p><img src='/home/steven/Pictures/devkit/Screenshot%20from%202017-03-13%2016-21-55.png' alt='Screenshot from 2017-03-13 16-21-55' /></p><p>click &quot;Load License&quot; and &quot;Copy License&quot; (You can find lic file in firmware path [phenix_devkit path]/amp_system/)</p><p><img src='/home/steven/Pictures/devkit/Screenshot%20from%202017-03-13%2016-23-26.png' alt='Screenshot from 2017-03-13 16-23-26' /></p><p>select your license and click open.</p><p>the last step, you need to add some enviroment parameter in <strong>.bashrc</strong>:</p><pre class='md-fences mock-cm' style='display:block;position:relative'>source /opt/Xilinx/Vivado/2016.4/settings64.sh
+source /opt/Xilinx/SDK/2016.4/settings64.sh
+export PATH=$PATH:/opt/Xilinx/SDK/2016.4/bin</pre><h3><a name='header-c75' class='md-header-anchor '></a>1.3 Install cable driver</h3><p>​	On Windows, Install Cable Drivers is an optional selection in the installer.For Linux, because root or sudo access is required to install drivers, this option has been removed from the Linux installer beginning in Vivado 2015.4. The general Vivado installer can now be run on Linux without root or sudo privileges. To install cable drivers on Linux, there is now a script that must be run as root or sudo post installation.</p><p>Script Location: <Vivado Install Dir>/data/xicom/cable_drivers/lin64/install_script/install_drivers/
+Script Name: install_drivers</p><p><strong>Reference: ug973-vivado-release-notes-install-license</strong></p><h3><a name='header-c83' class='md-header-anchor '></a>1.4 Add Vivado SDK to Dash</h3><p>​	After steps from 1.1 to 1.3, Vivado SDK has been installed successfully, but in x64 ubuntu, we still cannot find vivado in Dash, so we have to add it by ourselves:</p><p>For Vivado:</p><pre class='md-fences mock-cm' style='display:block;position:relative'>sudo touch /usr/share/applications/vivado.desktop
+sudo vim /usr/share/applications/vivado.desktop</pre><p>add these statement:</p><pre class='md-fences mock-cm' style='display:block;position:relative'>[Desktop Entry]
+Encoding=UTF-8
+Name=Vivado 2016.4
+Exec=[Vivado Install Dir]/Vivado/2016.4/bin/vivado
+Terminal=false
+Type=Application
+Icon=[Vivado Install Dir]/Vivado/2016.4/doc/images/vivado_logo.png
+StartupNotify=true
+Categories=System;	</pre><p>For SDK:</p><pre class='md-fences mock-cm' style='display:block;position:relative'>cd [Vivado Install Dir]/SDK/2016.4/eclipse/lnx64.o/
+sudo mkdir jre
+cd jre 
+sudo ln -s [your jdk path]/jre/bin
+sudo touch /usr/share/applications/xsdk.desktop
+sudo vim /usr/share/applications/xsdk.desktop</pre><p>add these statement:</p><pre class='md-fences mock-cm' style='display:block;position:relative'>[Desktop Entry]
+Encoding=UTF-8
+Name=SDK 2016.4
+Exec=xsdk
+Terminal=false
+Type=Application
+Icon=[Vivado Install Dir]/SDK/2016.4/data/sdk/images/sdk_logo.png
+StartupNotify=true
+Categories=System;</pre><p><strong>Note: </strong></p><p><strong>When launch SDK in Dash, it shows this error, it means you have to launch sdk with shell command &quot;xsdk&quot;, otherwise, you may find that you can&#39;t close SDK</strong>:</p><p><strong><img src='/home/steven/Pictures/devkit/Screenshot%20from%202017-03-14%2017-02-33.png' alt='Screenshot from 2017-03-14 17-02-33' /></strong></p><p><strong>If you launch SDK in terminal with command &quot;xsdk&quot;, and there is nothing happen, but show information below:</strong></p><pre class='md-fences mock-cm' style='display:block;position:relative'>****** Xilinx Software Development Kit
+****** SDK v2016.4 (64-bit)
+  **** SW Build 1733598 on Wed Dec 14 22:35:42 MST 2016
+    ** Copyright 1986-2016 Xilinx, Inc. All Rights Reserved.
+
+Launching SDK with command /opt/Xilinx/SDK/2016.4/eclipse/lnx64.o/eclipse -vmargs -Xms64m -Xmx512m -Dorg.eclipse.swt.internal.gtk.cairoGraphics=false</pre><p><strong>then, you need to add these 2 lines to [Vivado Install Dir]/SDK/2016.4/eclipse/lnx64.o/eclipse.ini before statement &quot;-vmargs&quot;</strong></p><pre class='md-fences mock-cm' style='display:block;position:relative'>--launcher.GTK_version
+2</pre><p><strong>just like this:</strong></p><p><img src='/home/steven/Pictures/devkit/Screenshot%20from%202017-03-15%2000-25-33.png' alt='Screenshot from 2017-03-15 00-25-33' /></p><hr /><h2><a name='header-c115' class='md-header-anchor '></a>2.Build Minimum System Hardware</h2><h3><a name='header-c116' class='md-header-anchor '></a>2.1 Install Board Interface File</h3><p>(Reference: ug895-vivado-system-level-design-entry.pdf Appx.A)</p><p>After installing Vivado, the installation directory will contain a folder called <strong>board_files</strong>. This folder contains XML files for different FPGA boards manufactured by Xilinx. </p><p>XML files define different interfaces on the board. Interfaces such as UART, DDR Memory, Ethernet etc. For example, we use IP core AXI UART16550, but it has 14pins by default, there are only 2 pins in our devkit for uart, so we have to custom the interface of the IP core through XML. After installing board interface file, we will be able to assign different inerfaces that are available on your selected board to a specific IP block:</p><p><img src='/home/steven/Pictures/devkit/Screenshot%20from%202017-03-20%2011-22-15.png' alt='Screenshot from 2017-03-20 11-22-15' /></p><p>Robsense has written these XML files, they are stored in our firmware project, all you need is just get it from github, and copy then into path <strong>board_files</strong>:</p><pre class='md-fences mock-cm' style='display:block;position:relative'>cd [phenix_devkit path]/amp_system/
+tar xf vivado_prj.tar.gz
+sudo cp vivado_prj/phenix_devkit [Vivado Install Dir]/Vivado/2016.4/data/boards/board_files -r</pre><p></p><p><strong>Note:</strong> If you are interested in how to write the XML, you can reference Chapter Appx.A in Xilinx offical document <strong>UG895 </strong>(<a href='https://www.xilinx.com/support/documentation/sw_manuals/xilinx2016_4/ug895-vivado-system-level-design-entry.pdf' target='_blank' >https://www.xilinx.com/support/documentation/sw_manuals/xilinx2016_4/ug895-vivado-system-level-design-entry.pdf</a>).</p><h3><a name='header-c132' class='md-header-anchor '></a>2.2 Create Project</h3><p>(Reference:<a href='http://zedboard.org/zh-hant/node/1454' target='_blank' >http://zedboard.org/zh-hant/node/1454</a>)</p><p>Open Vivadio and click &quot;Create New Project&quot;, input project name, and click Next</p><p><img src='/home/steven/Pictures/devkit/Screenshot%20from%202017-03-13%2018-18-21.png' alt='Screenshot from 2017-03-13 18-18-21' /></p><p>select &quot;RTL Project&quot;</p><p><img src='/home/steven/Pictures/devkit/Screenshot%20from%202017-03-13%2018-20-01.png' alt='Screenshot from 2017-03-13 18-20-01' /></p><p>click Next until the UI below</p><p><img src='/home/steven/Pictures/devkit/Screenshot%20from%202017-03-13%2018-42-46.png' alt='Screenshot from 2017-03-13 18-42-46' /></p><p>click <strong>Boards </strong>find Phenix Pro Devkit, click Next and then click finish:</p><p><strong>Note:</strong> If you can&#39;t find Phenix Pro Devkit, please make sure that you installed board interface files right in section 2.1</p><p><img src='/home/steven/Pictures/devkit/Screenshot%20from%202017-03-20%2011-12-12.png' alt='Screenshot from 2017-03-20 11-12-12' /></p><p>click &quot;Create Block Design&quot;, input design name, and click &quot;OK&quot;</p><p><img src='/home/steven/Pictures/devkit/Screenshot%20from%202017-03-13%2018-45-01.png' alt='Screenshot from 2017-03-13 18-45-01' /></p><p></p><h3><a name='header-c159' class='md-header-anchor '></a>2.3  Create Minimum System Design</h3><p>now we have a empty design, let&#39;s add IP to it</p><p><img src='/home/steven/Pictures/devkit/Screenshot%20from%202017-03-13%2018-50-19.png' alt='Screenshot from 2017-03-13 18-50-19' /></p><p>click <img src='/home/steven/Pictures/devkit/Screenshot%20from%202017-03-13%2018-51-36.png' alt='Screenshot from 2017-03-13 18-51-36' />and input zynq to search &quot;ZYNQ Processing System&quot;,  double click to add it to our design, and click <strong>Run Block Automation</strong>, Vivado will configure PS core with board interface files which we installed int 2.1<img src='/home/steven/Pictures/devkit/Screenshot%20from%202017-03-13%2018-55-06.png' alt='Screenshot from 2017-03-13 18-55-06' /></p><p>now, the PS core should be like this :</p><p><img src='/home/steven/Pictures/devkit/Screenshot%20from%202017-03-20%2011-18-22.png' alt='Screenshot from 2017-03-20 11-18-22' /></p><p>connect an input signal for AXI, like the image below:</p><p><img src='/home/steven/Pictures/devkit/Screenshot%20from%202017-03-20%2011-20-49.png' alt='Screenshot from 2017-03-20 11-20-49' /></p><p>Now, we&#39;ve created our PS within the IPI block, next, we need to create an HDL wrapper for the Vivado synthesizer knows what to do with our IP block</p><p><img src='/home/steven/Pictures/devkit/Screenshot%20from%202017-03-13%2019-48-02.png' alt='Screenshot from 2017-03-13 19-48-02' /></p><p>right mouse click <img src='/home/steven/Pictures/devkit/Screenshot%20from%202017-03-13%2019-49-26.png' alt='Screenshot from 2017-03-13 19-49-26' />and select &quot;Create HDL Wrapper&quot;,This will generate a HDL wrapper that the Vivado synthesizer understands.  Once this happens, we are ready to generate our bitfile. This might sound like a large jump, but there isn&#39;t anything else in our design - it&#39;s almost entirely PS (the only PL portion is that AXI 
+port support logic).</p><p>next, we need to set &quot;Top moudule name&quot;, click &quot;Synthesis Settings&quot;<img src='/home/steven/Pictures/devkit/Screenshot%20from%202017-03-14%2010-46-20.png' alt='Screenshot from 2017-03-14 10-46-20' />and &quot;...&quot;button, select phenix_devkit_wrapper:</p><p><img src='/home/steven/Pictures/devkit/Screenshot%20from%202017-03-14%2014-38-02.png' alt='Screenshot from 2017-03-14 14-38-02' /></p><p>At last, click &quot;Run Synthesis&quot;, &quot;Run Implementation&quot; and &quot;Generate Bitstream&quot; to generate PL program</p><h3><a name='header-c187' class='md-header-anchor '></a>2.4 Export hdf(hardware definition file) file</h3><p>​	If we want to develop on PS with Xilinx SDK, we need to tell SDK how our hardware looks like, which is the usage of the hdf file. Exporting hdf file is quite simple, just click <strong>File-&gt;Export-&gt;Export Hardware</strong>, and choose the path you want to store the hdf file(don&#39;t forget include bitstream file):</p><p><img src='/home/steven/Pictures/devkit/Screenshot%20from%202017-03-14%2015-54-04.png' alt='Screenshot from 2017-03-14 15-54-04' /></p><p>now, we can launch SDK to generate FSBL and BSP(chapter 3.3,3.4)</p><h2><a name='header-c194' class='md-header-anchor '></a>3.Run AMP(Asymmetric Multi-Processing System) on Devkit</h2><p>​	This chapter will show you a simple demo about running an AMP system on Devkit, with cpu0 running linux and cpu1 running bare-metal program.(Reference: Xilinx Official Doc <strong>xapp1078-amp-linux-bare-metal.pdf</strong>). </p><p>​	The most important thing is that two cpu should run in different DDR physical address space. Devkit has 512MB DDR, whose physical address range is 0x0 - 0x20000000. In this case, we set 0x0 - 0x19FFFFFF(416MB) as linux space, and 0x1A000000 - 0x1FFFFFFF(96MB) as bare-metal space</p><h3><a name='header-c199' class='md-header-anchor '></a>3.1 Principle</h3><p>Simply put, the principle of Amp system in zynq is cpu0 wake up cpu1, now, let&#39;t see how it works:</p><p><img src='/home/steven/Pictures/devkit/Screenshot%20from%202017-03-20%2013-38-38.png' alt='Screenshot from 2017-03-20 13-38-38' /></p><p>Cpu0 start first, at the same time, cpu1 running a little piece of code which have been loaded from bootrom to ocm(on chip memory), it watching the value of 0xfffffff0 adress. after linux startup, it will write the code segment first address of cpu1 app into 0xfffffff0. Once cpu1 realize the value is changed to nonzero, then the pc pointer of cpu1 will jump to the adress which is written at 0xfffffff0, this is how the whole system startup.</p><h3><a name='header-c206' class='md-header-anchor '></a>3.2 Configure SDK</h3><p>​	First of all, download xapp1078.zip from <a href='https://www.xilinx.com/search/site-keyword-search.html?searchKeywords=xapp1078' target='_blank' >https://www.xilinx.com/search/site-keyword-search.html?searchKeywords=xapp1078</a> and unzip it. This zip file include standalone BSP files (used by the bare-metal application) and modified FSBL files. To give SDK knowledge of these files, SDK needs to be configured to have knowledge of the new repository.</p><p>Now, open Xilinx SDK, indicate a dirctory as workspace and click OK:</p><p><img src='/home/steven/Pictures/devkit/Screenshot%20from%202017-03-14%2016-48-32.png' alt='Screenshot from 2017-03-14 16-48-32' /></p><p>Select <strong>Xilinx_tools &gt; Repositories</strong></p><p><img src='/home/steven/Pictures/devkit/Screenshot%20from%202017-03-15%2010-14-40.png' alt='Screenshot from 2017-03-15 10-14-40' /></p><p>select <strong>New</strong> and Browse to and select the directory design\src\sdk_repo, select <strong>OK</strong></p><p><img src='/home/steven/Pictures/devkit/Screenshot%20from%202017-03-15%2010-16-55.png' alt='Screenshot from 2017-03-15 10-16-55' /></p><h3><a name='header-c221' class='md-header-anchor '></a>3.3 Create FSBL Application</h3><p>Select <strong>File &gt; New &gt; Application_Project</strong></p><p><img src='/home/steven/Pictures/devkit/Screenshot%20from%202017-03-15%2010-30-11.png' alt='Screenshot from 2017-03-15 10-30-11' /></p><p>select <strong>New...</strong> button to indicate the hdf file, click <strong>Finish</strong> and <strong>Next</strong></p><p><img src='/home/steven/Pictures/devkit/Screenshot%20from%202017-03-15%2010-31-51.png' alt='Screenshot from 2017-03-15 10-31-51' /></p><p>select <strong>Zynq FSBL</strong> and click <strong>Finish</strong></p><p><strong><img src='/home/steven/Pictures/devkit/Screenshot%20from%202017-03-15%2011-13-50.png' alt='Screenshot from 2017-03-15 11-13-50' /></strong></p><p><strong>Note: xapp1078-amp-linux-bare-metal.pdf write that select Zynq FSBL for AMP, because FSBL generated by old version SDK don&#39;t support amp system</strong> </p><h3><a name='header-c236' class='md-header-anchor '></a>3.4 Create Bare-Metal Application For CPU1</h3><p>The instructions in this section create the application ELF that runs on CPU1 after the FSBL
+loads the applications to DDR memory.</p><p>First we need to create the BSP for cpu1, select <strong>File &gt; New &gt; Board_Support_Package</strong>. Change CPU to <strong>ps7_cortexa9_1</strong> and click <strong>Finish</strong></p><p><img src='/home/steven/Pictures/devkit/Screenshot%20from%202017-03-15%2011-26-33.png' alt='Screenshot from 2017-03-15 11-26-33' /></p><p>in the Board Support Package settings, select <strong>overview &gt; standalone</strong> and change both stdin and stdout to <strong>ps7_uart_1</strong><img src='/home/steven/Pictures/devkit/Screenshot%20from%202017-03-15%2013-25-28.png' alt='Screenshot from 2017-03-15 13-25-28' /></p><p>select <strong>Overview &gt; drivers &gt; cpu_cortexa9_1</strong> and add <strong>-DUSE_AMP=1</strong> to extra_compiler_flags</p><p><img src='/home/steven/Pictures/devkit/Screenshot%20from%202017-03-15%2013-28-40.png' alt='Screenshot from 2017-03-15 13-28-40' /></p><p>​	Now, we can create bare_metal application, select <strong>File &gt; New &gt; Application Project</strong>, set like image below, and click <strong>Finish</strong>:</p><p><img src='/home/steven/Pictures/devkit/Screenshot%20from%202017-03-15%2013-35-45.png' alt='Screenshot from 2017-03-15 13-35-45' /></p><p>change the code to a while cycle:</p><p><img src='/home/steven/Pictures/devkit/Screenshot%20from%202017-03-15%2013-46-22.png' alt='Screenshot from 2017-03-15 13-46-22' /></p><p>here comes the most important part: modify <strong>ld.scrip</strong> to tell gcc the first address of the code segment 0x1A000000, which we have discussed at the beginning of this chapter. So let&#39;s open <strong>ld.script</strong>, and change <strong>ps7_ddr_0_S_AXI_BASEADDR</strong> as 0x1A000000, <strong>Size</strong> as 0x1FF00000, <strong>Stack Size</strong> as 0x800000(8MB), <strong>Heap Size</strong> as 0x1000000(16MB), now, we can complie our code.</p><h3><a name='header-c260' class='md-header-anchor '></a>3.5 u-boot For CPU0</h3><p>Get u-boot source code for github:</p><pre class='md-fences mock-cm' style='display:block;position:relative'>git clone git://github.com/Xilinx/u-boot-xlnx.git</pre><p>As the same with bare-metal application on cpu1, u-boot also need to configure DDR address range(we use zedboard as our default configuration):</p><ul><li><p>modify CONFIG_SYS_SDRAM_SIZE in zynq_zed.h to (416 * 1024 * 1024)</p></li><li><p>modify memory section in devicetree (u-boot-xlnx/arch/arm/dts/zynq-zed.dts):</p><p><img src='/home/steven/Pictures/devkit/Screenshot%20from%202017-03-15%2014-23-34.png' alt='Screenshot from 2017-03-15 14-23-34' /></p></li></ul><p>make the configuration effective:</p><pre class='md-fences mock-cm' style='display:block;position:relative'>make zynq_zed_config</pre><p>complie  u-booot:</p><pre class='md-fences mock-cm' style='display:block;position:relative'>make ARCH=arm CROSS_COMPILE=arm-xilinx-linux-gnueabi- -j8</pre><p>last step, rename u-boot to u-boot.elf</p><p><strong>Note:</strong> compile error handle:</p><ul><li><p>fatal error: openssl/evp.h
+install openssl:</p><pre class='md-fences mock-cm' style='display:block;position:relative'>sudo apt-get install libssl-dev</pre></li></ul><ul><li><p>./bin/sh: 1: dtc: not found
+install dtc:</p><pre class='md-fences mock-cm' style='display:block;position:relative'>sudo apt-get install device-tree-compiler</pre></li></ul><h3><a name='header-c297' class='md-header-anchor '></a>3.6 Linux Kernel For CPU0</h3><p>Get kernel code from github:</p><pre class='md-fences mock-cm' style='display:block;position:relative'>git clone -b master --single-branch https://github.com/Xilinx/linux-xlnx.git</pre><p>compile kernel:</p><pre class='md-fences mock-cm' style='display:block;position:relative'>make ARCH=arm xilinx_zynq_defconfig
+make ARCH=arm UIMAGE_LOADADDR=0x8000 uImage -j8</pre><h3><a name='header-c304' class='md-header-anchor '></a>3.7 Linux Devicetree</h3><p>We use zedboard devicetree as our default(linux-xlnx/arch/arm/boot/dts/zynq-zed.dts), like steps in u-boot, modify memory section:</p><p><img src='/home/steven/Pictures/devkit/Screenshot%20from%202017-03-15%2014-40-18.png' alt='Screenshot from 2017-03-15 14-40-18' /></p><p>generate dtb file with command</p><pre class='md-fences mock-cm' style='display:block;position:relative'>./scripts/dtc/dtc -I dts -O dtb -o devicetree.dtb arch/arm/boot/dts/zynq-zed.dts</pre><h3><a name='header-c312' class='md-header-anchor '></a>3.8 Linux Filesystem</h3><p><strong>Note: </strong>We use <strong>genext2fs</strong> to generate ramdisk, make sure your computer has installed this software(download here:<a href='https://sourceforge.net/projects/genext2fs/files/' target='_blank' >https://sourceforge.net/projects/genext2fs/files/</a>).</p><p>Fisrt, download arm_ramdisk.image.gz from <a href='http://www.wiki.xilinx.com/Build+and+Modify+a+Rootfs' target='_blank' >http://www.wiki.xilinx.com/Build+and+Modify+a+Rootfs</a>, with these command below, you will have root filesystem in &quot;tmpmnt&quot; directory:</p><pre class='md-fences mock-cm' style='display:block;position:relative'>gunzip arm_ramdisk.image.gz
+chmod u+rwx arm_ramdisk.image
+mkdir tmpmnt
+sudo mount -o loop arm_ramdisk.image tmpmnt/</pre><p>As we discussed in chapter 3.1, we need <strong>rwmem.elf</strong> to write address 0xfffffff0 in ram, so, let&#39;s put it into directory &quot;tmpmnt/usr&quot;, and regenerate <strong>.image.gz</strong> file:</p><pre class='md-fences mock-cm' style='display:block;position:relative'>cp xapp1078/design/generated_files/SDK_apps/rwmem.elf tmpmnt/usr
+sudo genext2fs -b 15360 -N 1000 -d tmpmnt ramdisk.image
+gzip -9 ramdisk.image
+mkimage -A arm -T ramdisk -C gzip -n Ramdisk -d ramdisk.image.gz uramdisk.image.gz</pre><h3><a name='header-c321' class='md-header-anchor '></a>3.9 Create BOOT.bin</h3><p>This is the last step, let&#39;s go back to SDK, select <strong>Xilinx Tools-&gt;Create Zynq Boot Image</strong>, add fsbl.elf(chapter 3.3), bit file(chapter 2.3), u-boot.elf(chapter 3.5), hello_world.elf(chapter 3.4), click <strong>Create Image</strong>:</p><p><img src='/home/steven/Pictures/devkit/Screenshot%20from%202017-03-15%2017-03-51.png' alt='Screenshot from 2017-03-15 17-03-51' /></p><p>now, you can find BOOT.bin file in your workspace directory</p><h3><a name='header-c328' class='md-header-anchor '></a>3.10 Test</h3><p>Copy BOOT.bin, uImage, devicetree.dtb, and arm_ramdisk.image.gz to SD card, connect usb console, baudrate 115200, set devkit as SD card boot with DIP switch:</p><p><img src='/home/steven/Pictures/devkit/webwxgetmsgimg.jpg' alt='webwxgetmsgimg' /></p><p>power-on devkit.</p><p>At first boot, we need to set uboot argument, which let linux only be aware of one cpu: </p><pre class='md-fences mock-cm' style='display:block;position:relative'>set bootargs &#39;console=ttyPS0,115200 maxcpus=1 root=/dev/ram rw earlyprintk&#39;</pre><p>After linux boot-up, input command below to terminal, you will see &quot;hello world&quot; print:</p><p><img src='/home/steven/Pictures/devkit/Screenshot%20from%202017-03-15%2018-20-28.png' alt='Screenshot from 2017-03-15 18-20-28' /></p><p></p></div>
+</body>
+</html>
