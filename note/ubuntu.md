@@ -369,7 +369,7 @@ if [ $(ls ~/Steven/Develop/server|wc -l) == 0 ]; then#判断是否已经挂载
 
 
 
-## 十七\ beyond compare 永久试用方法
+## 十七 beyond compare 永久试用方法
 
 到期以后就删除rm ~/.config/bcompare/registry.dat
 
@@ -539,7 +539,6 @@ cd到删除数据的文件夹, 查看其inode号
 
 ```
 ls -id
-
 ```
 
 用extundelete查看被删除文件的inode号:
@@ -828,5 +827,13 @@ OSMC_TGT_rbp2_20180207.img1       2048 499711  497664  243M  c W95 FAT32 (LBA)
 
 ```
 sudo mount -o loop,offset=1048576 OSMC_TGT_rbp2_20180207.img tmp/
+```
+
+
+
+## 三十五 卸载自带office
+
+```
+sudo apt-get remove --purge libreoffice*
 ```
 
