@@ -120,6 +120,18 @@ $sudo apt-get install lib32ncurses5 lib32z1
 
 下载相应自体放到/usr/share/fonts
 
+```
+sudo cp mtextra.ttf  symbol.ttf  WEBDINGS.TTF  wingding.ttf WINGDNG2.ttf WINGDNG3.ttf  /usr/share/fonts  
+```
+
+```
+sudo apt-get install ttf-wqy-microhei #文泉驿-微米黑
+sudo apt-get install ttf-wqy-zenhei #文泉驿-正黑
+sudo apt-get install xfonts-wqy #文泉驿-点阵宋体
+```
+
+
+
 5.输入法：
 
 ```
@@ -137,6 +149,16 @@ ppt、excel部分
 和word一样的方法添加环境变量，只是编辑的文件各不同：
 $ vi /usr/bin/wpp
 $ vi /usr/bin/et
+
+
+
+6.卸载自带office
+
+```
+sudo apt-get remove --purge libreoffice*
+```
+
+
 
 
 
