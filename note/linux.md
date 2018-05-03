@@ -930,3 +930,27 @@ errno137 :   Unknown error 137
 errno138 :   Unknown error 138
 
 errno139 :   Unknown error 139
+
+
+
+## 15. 指定动态库路径
+
+参考：https://blog.csdn.net/renwotao2009/article/details/51398739
+
+```
+vim /etc/ld.so.conf.d/[name].conf
+```
+
+输入动态库存放路径，无需任何特殊符号，保存以后使之生效并查看：
+
+```
+sudo ldconfig -v
+```
+
+查看程序使用的动态库：
+
+```
+ldd [name]
+```
+
+**注意：**在修改了/etc/ld.so.conf 文件或者在系统中安装了新的函数库之后，需要运行命令 ldconfig ，该命令用来刷新系统的共享库缓存，即 /etc/ld.so.cache 文件。为了减少共享库系统的库搜索时间，共享库系统维护了一个共享库so名称的缓存文件 /etc/ld.so.cache 。 因此，在安装新的共享库之后，一定要运行 ldconfig刷新该缓存。

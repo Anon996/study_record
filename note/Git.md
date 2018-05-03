@@ -610,3 +610,26 @@ HTTP_PROXY=http://127.0.0.1:45463/
  export HTTP_PROXY=""
  export HTTPS_PROXY=""
 ```
+
+
+### 6. 设置代理
+
+```
+git config --global http.proxy http://127.0.0.1:1080
+git config --global https.proxy https://127.0.0.1:1080
+```
+
+取消
+
+```
+git config --global --unset http.proxy
+git config --global --unset https.proxy
+```
+
+查看
+
+```
+git config --global --get http.proxy
+git config --global --get https.proxy
+```
+
