@@ -354,7 +354,7 @@ Categories=System;
 
 完成后注销重新登陆即可
 
-## 十五、ssh记住密码
+## 十五、ssh安装&记住密码
 
 ```
 sudo apt-get install openssh-server
@@ -391,7 +391,7 @@ if [ $(ls ~/Steven/Develop/server|wc -l) == 0 ]; then#判断是否已经挂载
 
 
 
-## 十七\ beyond compare 永久试用方法
+## 十七 beyond compare 永久试用方法
 
 到期以后就删除rm ~/.config/bcompare/registry.dat
 
@@ -561,7 +561,6 @@ cd到删除数据的文件夹, 查看其inode号
 
 ```
 ls -id
-
 ```
 
 用extundelete查看被删除文件的inode号:
@@ -788,7 +787,7 @@ cd gdb-7.5
 
   ```
 make
-make install
+sudo make install
 vim /etc/environment --把arm-linux-gdb加入环境变量 (:/usr/local/arm-gdb/bin)
 source /etc/environment  //更新环境变量
   ```
@@ -850,5 +849,13 @@ OSMC_TGT_rbp2_20180207.img1       2048 499711  497664  243M  c W95 FAT32 (LBA)
 
 ```
 sudo mount -o loop,offset=1048576 OSMC_TGT_rbp2_20180207.img tmp/
+```
+
+
+
+## 三十五 卸载自带office
+
+```
+sudo apt-get remove --purge libreoffice*
 ```
 
