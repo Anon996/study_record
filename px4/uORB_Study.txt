@@ -1,0 +1,36 @@
+uORB是一个命名空间
+
+main:
+    uORB::DeviceMaster -> init ->CDev::init -> Device::init (实例化DeviceMaster的时候没有传中断，也就是说这个模块没用到中断，所以这个调用基本没用)
+                                            -> register_driver:_devname=/obj/_obj_  name=obj_master
+
+orb_advertise_multi:
+    调用get_instance获取uORB::Manager,第一次调用的时候会new一个Manager类
+    然后调用Manager::orb_advertise_multi -> Manager::node_open -> Utils::node_mkpath 根据instance计数生成总路径名，放入path变量，实际上instance就是路径的数字后缀
+                                                               -> open 尝试打开刚才的path，没创建过所以肯定是失败
+                                                               -> Manager::node_advertise 之前打开path失败就调这个接口创建节点，实际上就是通过CDev的register_driver来创建节点的,里面调用ioctl命令ORBIOCADVERTISE
+                                                                                          命令中new了一个DeviceNode类，它继承了CDev,orb_advertise_multi返回值就是它
+                                         -> Manager::orb_publish 发布初始消息
+
+orb_advertise:
+    和有multi的比起来少了两个参数，一个用于计个数的instance，一个优先级，实际调的都是Manager::orb_advertise_multi, 没有的两个参数传空和默认优先级
+
+orb_publish:
+    orb_advertise_multi会返回一个orb_advert_t的数据作为handle传入Manager::orb_publish -> DeviceNode::publish -> DeviceNode::write 申请内存_data，将要发布的数据拷贝到_data,调用poll_notify通知等待的人
+
+orb_subscribe:
+    订阅主题调到最后实际就是open了相应的设备节点
+
+orb_copy:
+    实际上就是设备节点的read操作
+
+orb_check:
+    调用Mana::orb_check -> ioctl ORBIOCUPDATED -> apprears_updated 对比_generation，这个值在publish后会++，如果不一样代表有新数据，如果上层有设置intervel，则调用hrt_call_after，在intervel时间过后再通知有新数据
+
+
+添加自定义主题：
+
+在Firmware/msg下新建uORB的成员变量，eg: xxx.msg
+
+在Firmware/msg/CMakeLists.txt中添加话题的xxx.msg ，作为cmake的编译索引。 
+

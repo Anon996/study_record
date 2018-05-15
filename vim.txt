@@ -1,6 +1,0 @@
-1、.vimrc基本配置
-2、Bundle管理插件
-3、基础插件tagbar nerdtree minibuf
-4、Ubuntu安装ctag和cscope
-5、Solarized配色	git clone git://github.com/altercation/solarized.git
-6、BufExplorer \be切换文件
