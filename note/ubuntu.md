@@ -55,6 +55,7 @@ ctermfg表示函数名的颜色，可以自行更换。
 ​    [https://www.gnu.org/software/global/download.html下](https://www.gnu.org/software/global/download.html%C3%A4%C2%B8%E2%80%B9)载源码
 
 ```
+sudo apt-get install libncurses5-dev
 ./configure
 make
 sudo make install 安装
@@ -105,11 +106,11 @@ sudo apt-get install u-boot-tools
 2.安装配置环境：
 
 ```
-$sudo apt-get update
+sudo apt-get update
 
-$sudo apt-get install libc6-i386
+sudo apt-get install libc6-i386
 
-$sudo apt-get install lib32ncurses5 lib32z1
+sudo apt-get install lib32ncurses5 lib32z1
 ```
 
 3.开始安装
