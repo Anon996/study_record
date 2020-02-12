@@ -860,3 +860,60 @@ sudo mount -o loop,offset=1048576 OSMC_TGT_rbp2_20180207.img tmp/
 sudo apt-get remove --purge libreoffice*
 ```
 
+
+
+## 三十六 iPad作为副屏
+
+下载VirtScreen：
+
+```
+https://github.com/kbumsik/VirtScreen
+```
+
+virtscreen依赖于x11vnc，但是ubuntu下apt安装的版本过低，不支持muliptr参数，导致副屏鼠标不显示，下载最新版x11vnc:
+
+```
+git clone git@github.com:LibVNC/x11vnc.git
+```
+
+安装依赖
+
+```
+sudo apt-get build-dep x11vnc
+```
+
+编译和安装:
+
+```
+autoreconf -fiv
+./configure
+make
+make install
+```
+
+安装virtscreen
+
+```
+sudo dpkg -i virtscreen.deb
+
+```
+
+添加x11 inter显卡相关配置
+
+```
+
+```
+
+输入
+
+```
+Section "Device"
+    Identifier "intelgpu0"
+    Driver "intel"
+    Option "VirtualHeads" "1"
+EndSection
+```
+
+保存后重启
+
+运行以后设定分辨率为1440*1080，ipad端下载vnc客户端，连接电脑ip即可
