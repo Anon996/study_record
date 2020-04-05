@@ -50,11 +50,11 @@ let g:ctrlp_max_files = 0
 
 Bundle 'easymotion/vim-easymotion'
 
-Bundle 'Valloric/YouCompleteMe'
-	let g:ycm_global_ycm_extra_conf='~/.ycm_extra_conf.py'
-	let g:ycm_collect_identifiers_from_tag_files = 1  
-    let g:ycm_show_diagnostics_ui = 0 "关闭语法检查
-    let g:ycm_python_binary_path = '/usr/bin/python3.5'
+""Bundle 'Valloric/YouCompleteMe'
+""	let g:ycm_global_ycm_extra_conf='~/.ycm_extra_conf.py'
+""	let g:ycm_collect_identifiers_from_tag_files = 1  
+""    let g:ycm_show_diagnostics_ui = 0 "关闭语法检查
+""    let g:ycm_python_binary_path = '/usr/bin/python3.5'
 
 ""Bundle 'davidhalter/jedi-vim'
 "====基本配置==============================================================i=======
@@ -109,6 +109,7 @@ inoremap [ []<ESC>i
 inoremap { {}<ESC>i
 inoremap ' ''<ESC>i
 inoremap " ""<ESC>i
+inoremap < <><ESC>i
 nmap  t= :resize+3<CR>
 nmap  t- :resize-3<CR>
 nmap  t, :vertical resize-3<CR>
