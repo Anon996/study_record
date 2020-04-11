@@ -4,3 +4,17 @@
 4、Ubuntu安装ctag和cscope
 5、Solarized配色	git clone git://github.com/altercation/solarized.git
 6、BufExplorer \be切换文件
+
+
+ncm2:
+C/C++补全：
+    Plug 'ncm2/ncm2-pyclang'
+系统安装llvm
+    brew install llvm
+
+
+python补全：
+    Plug 'davidhalter/jedi-vim'
+    Plug 'ncm2/ncm2-jedi'
+系统安装jedi
+   pip3 install jedi 
