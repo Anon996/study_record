@@ -18,3 +18,5 @@ python补全：
     Plug 'ncm2/ncm2-jedi'
 系统安装jedi
    pip3 install jedi 
+
+libncurses5-dev
