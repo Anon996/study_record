@@ -95,7 +95,7 @@ au User Ncm2Plugin call ncm2#register_source({
     \ })
 
 let g:ncm2_pyclang#library_path = '/usr/local/Cellar/llvm/10.0.0_3/lib/libclang.dylib'
-let g:python3_host_prog='/usr/bin/python3'
+""let g:python3_host_prog='/usr/bin/python3'
 
 
 "====基本配置==============================================================i=======
@@ -115,7 +115,6 @@ set backupcopy=yes          " 设置备份时的行为为覆盖
 set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [POS=%l,%v][%p%%]\ %{strftime(\"%d/%m/%y\ -\ %H:%M\")}   "状态行显示的内容
 "set autochdir               " 自动切换当前目录为当前文件所在的目录
 set wildmenu				" 增强模式中的命令行自动完成操作
-set completeopt=longest,menu
 ""set ignorecase smartcase    " 搜索时忽略大小写，但在有一个或以上大写字母时仍保持对大小写敏感
 set nowrapscan              " 禁止在搜索到文件两端时重新搜索
 set incsearch               " 输入搜索内容时就显示搜索结果
