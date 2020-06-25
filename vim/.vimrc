@@ -1,35 +1,45 @@
-"========================================================================="
-let template_load=1
-let template_tags_replacing=1
-let T_AUTHOR="Steven"
-let T_DATE_FORMAT="%Y-%m-%d %H:%m:%S"
 
-"====插件下载及配置==============================================================i=======
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
-Bundle 'gmarik/vundle'
+call plug#begin('~/.vim/plugged')
+Plug 'scrooloose/nerdtree'
+Plug 'majutsushi/tagbar'
+Plug 'bling/vim-airline'
+Plug 'jlanzarotta/bufexplorer'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'easymotion/vim-easymotion'
+Plug 'ncm2/ncm2'
+Plug 'roxma/nvim-yarp'
+Plug 'roxma/vim-hug-neovim-rpc'
+Plug 'ncm2/ncm2-bufword'
+Plug 'ncm2/ncm2-path'
+Plug 'ncm2/ncm2-github'
+Plug 'ncm2/ncm2-tagprefix'
+Plug 'ncm2/ncm2-gtags'
+Plug 'ncm2/ncm2-syntax'
+Plug 'ncm2/ncm2-jedi'
+Plug 'ncm2/ncm2-pyclang'
+Plug 'ObserverOfTime/ncm2-jc2'
+Plug 'davidhalter/jedi-vim'
+Plug 'Shougo/neco-syntax'
+call plug#end()
 
-Bundle 'majutsushi/tagbar'
+
+
 "nmap <Leader>tb :TagbarToggle<CR>        "快捷键设置
 let g:tagbar_ctags_bin='ctags'            "ctags程序的路径
 let g:tagbar_width=30                    "窗口宽度的设置
 map <F3> :Tagbar<CR>
 autocmd BufReadPost *.cpp,*.c,*.h,*.hpp,*.cc,*.cxx call tagbar#autoopen()	"如果是c语言的程序的话，tagbar自动开启
 
-Bundle 'scrooloose/nerdtree'
 let NERDTreeWinPos='left'
 let NERDTreeWinSize=30
 let NERDTreeIgnore=['\~$', '\.pyc$', '\.swp$', '\.o$', '\.d$[[file]]', '__pycache__$']
 map <F2> :NERDTreeToggle<CR>
 
-Bundle 'bling/vim-airline'
 set laststatus=2
 
-Bundle 'jlanzarotta/bufexplorer'
 let g:bufExplorerShowRelativePath=1  " Show relative paths.
 
 
-Bundle 'ctrlpvim/ctrlp.vim'
 let g:ctrlp_map = 'fp'
 let g:ctrlp_cmd = 'CtrlP'
 map <leader>f :CtrlPMRU<CR>
@@ -46,17 +56,48 @@ let g:ctrlp_follow_symlinks=1
 let g:ctrlp_max_depth = 40
 let g:ctrlp_max_files = 0
 
-""Bundle 'tacahiroy/ctrlp-funky'
+" enable ncm2 for all buffers
+autocmd BufEnter * call ncm2#enable_for_buffer()
 
-Bundle 'easymotion/vim-easymotion'
+" IMPORTANT: :help Ncm2PopupOpen for more information
+set completeopt=noinsert,menuone,noselect
+" suppress the annoying 'match x of y', 'The only match' and 'Pattern not
+" found' messages
+set shortmess+=c
 
-""Bundle 'Valloric/YouCompleteMe'
-""	let g:ycm_global_ycm_extra_conf='~/.ycm_extra_conf.py'
-""	let g:ycm_collect_identifiers_from_tag_files = 1  
-""    let g:ycm_show_diagnostics_ui = 0 "关闭语法检查
-""    let g:ycm_python_binary_path = '/usr/bin/python3.5'
+" CTRL-C doesn't trigger the InsertLeave autocmd . map to <ESC> instead.
+inoremap <c-c> <ESC>
 
-""Bundle 'davidhalter/jedi-vim'
+" When the <Enter> key is pressed while the popup menu is visible, it only
+" hides the menu. Use this mapping to close the menu and also start a new
+" line.
+inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
+
+" Use <TAB> to select the popup menu:
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+" wrap existing omnifunc
+" Note that omnifunc does not run in background and may probably block the
+" editor. If you don't want to be blocked by omnifunc too often, you could
+" add 180ms delay before the omni wrapper:
+"  'on_complete': ['ncm2#on_complete#delay', 180,
+"               \ 'ncm2#on_complete#omni', 'csscomplete#CompleteCSS'],
+au User Ncm2Plugin call ncm2#register_source({
+    \ 'name' : 'css',
+    \ 'priority': 9,
+    \ 'subscope_enable': 1,
+    \ 'scope': ['css','scss'],
+    \ 'mark': 'css',
+    \ 'word_pattern': '[\w\-]+',
+    \ 'complete_pattern': ':\s*',
+    \ 'on_complete': ['ncm2#on_complete#omni', 'csscomplete#CompleteCSS'],
+    \ })
+
+let g:ncm2_pyclang#library_path = '/usr/local/Cellar/llvm/10.0.0_3/lib/libclang.dylib'
+let g:python3_host_prog='/usr/bin/python3'
+
+
 "====基本配置==============================================================i=======
 set nocompatible            " 关闭 vi 兼容模式
 syntax on                   " 自动语法高亮
@@ -68,10 +109,10 @@ set softtabstop=4           " 使得按退格键时可以一次删掉 4 个空�
 set tabstop=4               " 设定 tab 长度为 4
 set expandtab
 set nobackup                " 覆盖文件时不备份
-set showcmd         " 输入的命令显示出来，看的清楚些  
+set showcmd         " 输入的命令显示出来，看的清楚些
 filetype plugin indent on   " 开启插件
 set backupcopy=yes          " 设置备份时的行为为覆盖
-set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [POS=%l,%v][%p%%]\ %{strftime(\"%d/%m/%y\ -\ %H:%M\")}   "状态行显示的内容  
+set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [POS=%l,%v][%p%%]\ %{strftime(\"%d/%m/%y\ -\ %H:%M\")}   "状态行显示的内容
 "set autochdir               " 自动切换当前目录为当前文件所在的目录
 set wildmenu				" 增强模式中的命令行自动完成操作
 set completeopt=longest,menu
@@ -93,6 +134,8 @@ set backspace=indent,eol,start
                             " 不设定在插入状态无法用退格键和 Delete 键删除回车符
 set cmdheight=1             " 设定命令行的行数为 1
 set laststatus=2            " 显示状态栏 (默认值为 1, 无法显示状态栏)
+
+set pastetoggle=<F11>
 
 "系统剪贴板
 if has('clipboard')
@@ -158,11 +201,11 @@ function! FindFiles(pat, ...)
 	for str in a:000
 	   let path .= str . ','
 	endfor
-			 
+
 	if path == ''
 	   let path = &path
 	endif
-					
+
 	echo 'finding...'
 	redraw
 	call append(line('$'), split(globpath(path, a:pat), '\n'))
@@ -175,7 +218,7 @@ function! VimEnterCallback()
 	  if fnamemodify(f, ':e') != 'c' && fnamemodify(f, ':e') != 'h'
 		   continue
 	  endif
-								 
+
 	  call FindGtags(f)
 	endfor
 endfunc
@@ -189,7 +232,7 @@ function! FindGtags(f)
 		elseif dir == '/'
 			break
 		endif
-																			  
+
 		let dir = fnamemodify(dir, ":h")
 	endwhile
 endfunc
@@ -202,28 +245,28 @@ endfunction
 "====colors and theme=========================================================================================================
 syntax enable
 "set background=dark
-set t_Co=256  
+set t_Co=256
 colorscheme  molokai "Tomorrow-Night-Bright
 
 "====Open the file and return to the last closed position=========================================================================================================
-au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif  
+au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
 
 "====add program head comment=========================================================================================================
-autocmd BufNewFile *.[ch],*.hpp,*.cpp exec ":call SetTitle()" 
-autocmd FileWritePre,BufWritePre *.[ch],*.hpp,*.cpp exec ":call SetLastModify()" 
+autocmd BufNewFile *.[ch],*.hpp,*.cpp exec ":call SetTitle()"
+autocmd FileWritePre,BufWritePre *.[ch],*.hpp,*.cpp exec ":call SetLastModify()"
 
-func SetTitle()  
-    call setline(1,"/*********************************************************************************")   
-    call append(1, " *Copyright(C),2015-".strftime("%Y").", Robsense Tech. All rights reserved.")  
-    call append(2, " *FileName:    ".expand("%:t"))   
-    call append(3, " *Author:      HeBin")  
-    call append(4, " *Version:     0.1")  
-    call append(5, " *Date:        ".strftime("%Y-%m-%d %H:%M:%S"))   
-    call append(6, " *Last Modify: ".strftime("%Y-%m-%d %H:%M:%S"))   
-    call append(7, " *Description: ")   
-    call append(8, "**********************************************************************************/")   
-    call append(9, "")  
-    call append(10, "")  
+func SetTitle()
+    call setline(1,"/*********************************************************************************")
+    call append(1, " *Copyright(C),2015-".strftime("%Y").", Robsense Tech. All rights reserved.")
+    call append(2, " *FileName:    ".expand("%:t"))
+    call append(3, " *Author:      HeBin")
+    call append(4, " *Version:     0.1")
+    call append(5, " *Date:        ".strftime("%Y-%m-%d %H:%M:%S"))
+    call append(6, " *Last Modify: ".strftime("%Y-%m-%d %H:%M:%S"))
+    call append(7, " *Description: ")
+    call append(8, "**********************************************************************************/")
+    call append(9, "")
+    call append(10, "")
 endfunc
 
 func SetLastModify()
@@ -234,21 +277,21 @@ func SetLastModify()
     endif
 endfunc
 
-autocmd BufNewFile *.sh,*py,Makefile,*.mk exec ":call SetScriptTitle()" 
-autocmd FileWritePre,BufWritePre *.sh,*py,Makefile,*.mk exec ":call SetScriptLastModify()" 
+autocmd BufNewFile *.sh,*py,Makefile,*.mk exec ":call SetScriptTitle()"
+autocmd FileWritePre,BufWritePre *.sh,*py,Makefile,*.mk exec ":call SetScriptLastModify()"
 
-func SetScriptTitle()  
-    call setline(1,"#*********************************************************************************")   
-    call append(1, "#Copyright(C),2015-".strftime("%Y").", Robsense. All rights reserved.")  
-    call append(2, "#FileName:    ".expand("%:t"))   
-    call append(3, "#Author:      HeBin")  
-    call append(4, "#Version:     0.1")  
-    call append(5, "#Date:        ".strftime("%Y-%m-%d %H:%M:%S"))   
-    call append(6, "#Last Modify: ".strftime("%Y-%m-%d %H:%M:%S"))   
-    call append(7, "#Description: ")   
-    call append(8, "#**********************************************************************************")   
-    call append(9, "")  
-    call append(10, "")  
+func SetScriptTitle()
+    call setline(1,"#*********************************************************************************")
+    call append(1, "#Copyright(C),2015-".strftime("%Y").", Robsense. All rights reserved.")
+    call append(2, "#FileName:    ".expand("%:t"))
+    call append(3, "#Author:      HeBin")
+    call append(4, "#Version:     0.1")
+    call append(5, "#Date:        ".strftime("%Y-%m-%d %H:%M:%S"))
+    call append(6, "#Last Modify: ".strftime("%Y-%m-%d %H:%M:%S"))
+    call append(7, "#Description: ")
+    call append(8, "#**********************************************************************************")
+    call append(9, "")
+    call append(10, "")
 endfunc
 
 func SetScriptLastModify()
@@ -261,14 +304,15 @@ endfunc
 
 
 "====add program main func=========================================================================================================
-autocmd BufNewFile *main.c exec ":call SetMainFunc()" 
+autocmd BufNewFile *main.c exec ":call SetMainFunc()"
 
 func SetMainFunc()
-    call append(11, "int main()")  
-    call append(12, "{")  
-    call append(13, "")  
-    call append(14, "   return 0;")  
-    call append(15, "}")  
+    call append(11, "int main()")
+    call append(12, "{")
+    call append(13, "")
+    call append(14, "   return 0;")
+    call append(15, "}")
 endfunc
 
 set keymodel=startsel
+
