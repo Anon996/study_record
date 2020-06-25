@@ -25,3 +25,5 @@ python²¹È«£º
 
 Unknown function: necosyntax#initialize:
     Plug 'Shougo/neco-syntax'
+
+libncurses5-dev
