@@ -391,6 +391,11 @@ git push origin master --force // 再推送到远程仓库
 
 ## 二 Github
 
+token方式拉取仓库，否则无法上传：
+```
+git clone  https://<token>@github.com/Anon996/study_record.git
+```
+
 ### 1. 大文件
 
 github最大单个文件大小限制在100M, 超过100M要用lfs(Large File Storage)托管
