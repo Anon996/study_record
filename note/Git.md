@@ -582,6 +582,14 @@ git submodule init
 git submodule update --init --recursive
 ```
 
+### 5.丢弃所有子模块更改
+
+```
+git submodule foreach --recursive 'git reset --hard'
+```
+
+ 
+
 
 
 ###5. Connection refused
