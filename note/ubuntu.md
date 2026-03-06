@@ -965,7 +965,15 @@ sudo vim /etc/default/nfs-kernel-server
 RPCMOUNTDOPTS="--manage-gids -p 32767"
 ```
 
- 一键配置 Windows 防火墙（关键）
+**重启服务链**（顺序很重要）：
+
+```
+sudo service nfs-kernel-server stop
+sudo service rpcbind restart
+sudo service nfs-kernel-server start
+```
+
+一键配置 Windows 防火墙（关键）
 
 在 Windows 中以 **管理员身份** 打开 **PowerShell**，直接运行下面这行命令。这会放行 NFS 所需的所有固定端口：
 
