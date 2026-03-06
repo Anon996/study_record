@@ -177,7 +177,7 @@ export MINICOM
 
 ## 七、删除各子目录下某些文件
 
-`find . -name "文件名" -exec chmod 755 {} \;`
+`find . -name "文件名" -exec rm {} \;`
 
 
 
@@ -917,3 +917,67 @@ EndSection
 保存后重启
 
 运行以后设定分辨率为1440*1080，ipad端下载vnc客户端，连接电脑ip即可
+
+## 三十七 WSL开启nfs
+
+配置 WSL2 网络为“镜像模式”：
+
+在 Windows 中按下 `Win + R`，输入 `%UserProfile%` 并回车，创建一个名为 `.wslconfig` 的文件（如果已有则直接编辑），添加以下内容：
+
+```
+[wsl2]
+networkingMode=mirrored
+```
+
+**安装服务端：**
+
+```
+sudo apt update
+sudo apt install nfs-kernel-server
+```
+
+**编辑配置文件：** 执行 `sudo vim /etc/exports`，在末尾添加：
+
+```
+/home/robin/nfs *(rw,sync,no_subtree_check,no_root_squash)
+```
+
+**固定端口**
+
+```
+sudo vim /etc/nfs.conf
+```
+
+添加
+
+```
+[mountd]
+port=32767
+```
+
+```
+sudo vim /etc/default/nfs-kernel-server
+```
+
+添加
+
+```
+RPCMOUNTDOPTS="--manage-gids -p 32767"
+```
+
+ 一键配置 Windows 防火墙（关键）
+
+在 Windows 中以 **管理员身份** 打开 **PowerShell**，直接运行下面这行命令。这会放行 NFS 所需的所有固定端口：
+
+```
+New-NetFirewallRule -DisplayName "WSL_NFS_Fix" -Direction Inbound -LocalPort 111,2049,32767 -Protocol TCP -Action Allow; 
+New-NetFirewallRule -DisplayName "WSL_NFS_Fix_UDP" -Direction Inbound -LocalPort 111
+```
+
+设备端执行最终挂载命令
+
+由于你固定了端口为 `32767`，设备端的挂载命令建议加上 `tcp` 强制参数：
+
+```
+mount -v -t nfs -o nfsvers=3,nolock,tcp 192.168.1.11:/home/robin/nfs /userdata/nfs
+```
